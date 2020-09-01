@@ -39,8 +39,13 @@ public class UserServiceImpl implements UserService {
         if ("0".equals(user.getLockState())){
             throw new LoginExcepiton("用户账号被锁定请联系管理员");
         }
-
         //验证ip
+        String ips ="192.168.1.1,192.168.1.2,127.0.0.1"; //ip群
+        if (!ips.contains(ip)){
+            throw new LoginExcepiton("ip异常登陆失败");
+        }
+
+
         return user;
     }
 }

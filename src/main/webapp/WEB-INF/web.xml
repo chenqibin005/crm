@@ -5,13 +5,22 @@
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
   <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.liko.crm.web.filter.LoginFilter</filter-class>
+  </filter>
+    <filter-mapping>
+      <filter-name>LoginFilter</filter-name>
+      <url-pattern>*.do</url-pattern>
+      <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+  <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>com.liko.crm.web.filter.EncodingFilter</filter-class>
   </filter>
-    <filter-mapping>
-      <filter-name>EncodingFilter</filter-name>
-      <url-pattern>*.do</url-pattern>
-    </filter-mapping>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
   <servlet>
     <servlet-name>UserController</servlet-name>
     <servlet-class>com.liko.crm.settings.web.controller.UserController</servlet-class>
