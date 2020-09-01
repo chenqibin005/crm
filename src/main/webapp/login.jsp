@@ -13,6 +13,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 </head>
 <script type="text/javascript">
 	$(function () {
+		if (window.top!=window){
+			window.top.location =window.location;
+		}
 		//刷新页面后内容自动清空
 		$("#loginAct").val("");
 		$("#loginPwd").val("");

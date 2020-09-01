@@ -1,10 +1,14 @@
 package com.liko.crm.test;
 
+import com.liko.crm.settings.domain.User;
 import com.liko.crm.utils.MD5Util;
+import com.liko.crm.utils.SqlSessionUtil;
+import com.liko.crm.workbench.dao.ActivityDao;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author hangzhi1063
@@ -35,5 +39,10 @@ public class test {
             System.out.println("用户ip不合法,请联系管理员");
         }
         System.out.println( MD5Util.getMD5("13586380977CQB"));
+    }
+    @Test
+    public void testGet(){
+        ActivityDao activityDao = SqlSessionUtil.getSqlSession().getMapper(ActivityDao.class);
+
     }
 }

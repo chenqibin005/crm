@@ -9,6 +9,7 @@ import com.liko.crm.utils.Mybatis;
 import com.liko.crm.utils.SqlSessionUtil;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,11 +17,11 @@ import java.util.Map;
  * @date 2020/8/31 11:25
  */
 public class UserServiceImpl implements UserService {
-
+    private UserDao userDao = SqlSessionUtil.getSqlSession().getMapper(UserDao.class);
 
     @Override
     public User login(String loginAct, String loginPwd, String ip) throws LoginExcepiton {
-        UserDao userDao = SqlSessionUtil.getSqlSession().getMapper(UserDao.class);
+
         Map<String,String > map = new HashMap<>();
         map.put("loginAct",loginAct);
         map.put("loginPwd",loginPwd);
@@ -47,5 +48,11 @@ public class UserServiceImpl implements UserService {
 
 
         return user;
+    }
+
+    @Override
+    public List<User> getUserList() {
+        List<User> list=userDao.getUserList();
+        return list;
     }
 }
