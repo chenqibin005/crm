@@ -35,14 +35,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				url:"workbench/Activity/getUserList.do",
 				dataType:"json",
 				success:function (data) {
-
 					//data:userListJason对象
 					var html ="<option>1</option>"
 					$.each(data,function (i,e) {
 						html=html+"<option value='"+e.id+"'>"+e.name+"</option>"
 					})
 					//将拼接的html代码加入到列表框中
-
 					$("#create-Owner").html(html);
 					var id ="${user.id}"
 					//$("#create-Owner option[value="+id+"]").attr("selected","selected")
