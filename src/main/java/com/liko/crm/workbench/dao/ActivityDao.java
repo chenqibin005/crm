@@ -1,8 +1,10 @@
 package com.liko.crm.workbench.dao;
 
 import com.liko.crm.settings.domain.User;
+import com.liko.crm.workbench.domain.Activity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author hangzhi1063
@@ -11,4 +13,10 @@ import java.util.List;
 public interface ActivityDao {
 
 
+    int save(Activity a);
+
+
+    List<Activity> getActivityByCondition(Map<String, Object> map);
+
+    int getTotalByCondition(Map<String, Object> map);
 }
