@@ -39,7 +39,35 @@ public class ActivityController extends HttpServlet {
             save(request, response);
         } else if ("/workbench/Activity/pageList.do".equals(path)) {
             pageList(request, response);
+        }else if ("/workbench/Activity/delete.do".equals(path)){
+            delete(request,response);
+        }else if("/workbench/Activity/selectUlistAndActivity.do".equals(path)){
+            edit(request,response);
+        }else if("/workbench/Activity/update.do".equals(path)){
+            update(request,response);
         }
+    }
+
+
+
+    private void edit(HttpServletRequest request, HttpServletResponse response) {
+        String id = request.getParameter("id");
+
+
+        ActivityService as = (ActivityService) ServiceFactory.getService(new ActivityServiceImpl());
+        Map<String,Object> map =as.selectUlistAndActivity(id);
+        //List<User> ulist=us.getUserList();
+        //as.editActivity(id);
+        PrintJson.printJsonObj(response,map);
+
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) {
+        //获取ids
+        String[] ids =request.getParameterValues("id");
+        ActivityService as = (ActivityService) ServiceFactory.getService(new ActivityServiceImpl());
+        boolean flag =as.delect(ids);
+        PrintJson.printJsonFlag(response,flag);
     }
 
     private void pageList(HttpServletRequest request, HttpServletResponse response) {
@@ -67,6 +95,31 @@ public class ActivityController extends HttpServlet {
         PrintJson.printJsonObj(response,vo);
 
 
+    }
+
+    private void update(HttpServletRequest request, HttpServletResponse response) {
+        ActivityService as = (ActivityService) ServiceFactory.getService(new ActivityServiceImpl());
+        String id = request.getParameter("id");
+        String owner = request.getParameter("owner");
+        String name = request.getParameter("name");
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        String cost = request.getParameter("cost");
+        String description = request.getParameter("description");
+        String editTime = DateTimeUtil.getSysTime();
+        String editBy = ((User) request.getSession().getAttribute("user")).getName();
+        Activity a = new Activity();
+        a.setId(id);
+        a.setOwner(owner);
+        a.setName(name);
+        a.setStartDate(startDate);
+        a.setEndDate(endDate);
+        a.setCost(cost);
+        a.setDescription(description);
+        a.setEditTime(editTime);
+        a.setEditBy(editBy);
+        boolean flag = as.update(a);
+        PrintJson.printJsonFlag(response, flag);
     }
 
     private void save(HttpServletRequest request, HttpServletResponse response) {

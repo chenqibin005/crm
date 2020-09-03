@@ -76,5 +76,29 @@
         order by a.startDate desc
         limit #{skipPage},#{pageSize}
    </select>
+    <update id="update">
+        update tbl_activity
+        set
 
+        owner =#{owner},
+        name =#{name},
+        startDate =#{startDate},
+        endDate =#{endDate},
+        cost =#{cost},
+        description =#{description},
+        editTime =#{editTime},
+        editBy =#{editBy}
+        where id =#{id}
+
+    </update>
+    <delete id="delect">
+        delete from tbl_activity
+        where id in
+        <foreach collection="array" item="ids" open="(" close=")" separator=",">
+            #{ids}
+        </foreach>
+    </delete>
+    <select id="getActivityById" resultType="Activity">
+        select * from tbl_activity where id =#{id}
+    </select>
 </mapper>

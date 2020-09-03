@@ -17,4 +17,10 @@ public interface ActivityService {
 
 
     Pagination<Activity> pageList(Map<String, Object> map);
+
+    boolean delect(String[] ids);
+
+    Map<String, Object> selectUlistAndActivity(String id);
+
+    boolean update(Activity a);
 }
