@@ -23,6 +23,18 @@ public class ActivityServiceImpl implements ActivityService{
     private UserDao userDao =SqlSessionUtil.getSqlSession().getMapper(UserDao.class);
 
     @Override
+    public List<ActivityRemark> getRemarkByAid(String aid) {
+        List<ActivityRemark> ar=arDao.getRemarkByAid(aid);
+        return ar;
+    }
+
+    @Override
+    public Activity detail(String id) {
+        Activity a = activityDao.detail(id);
+        return a;
+    }
+
+    @Override
     public boolean save(Activity a) {
         boolean flag =true;
         int count =activityDao.save(a);

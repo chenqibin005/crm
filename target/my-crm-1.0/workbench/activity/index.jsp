@@ -74,7 +74,7 @@
                     dataType: "json",
                     success: function (data) {
                         if (data.success) {
-                            //$("#activityAddFrm")[0].reset();
+                            $("#activityAddFrm")[0].reset();
                             $("#createActivityModal").modal("hide");
                             pageList(1,$("#activityPage").bs_pagination('getOption', 'rowsPerPage'));
                         } else {
@@ -261,7 +261,7 @@
                     $.each(data.list,function (i,n) {
                         html += '<tr class="active"> ';
                         html += '<td><input type="checkbox" name="xz" value="'+n.id+'" /></td>';
-                        html += '<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href=\'workbench/activity/detail.jsp\';">'+n.name+'</a></td>';
+                        html += '<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href=\'workbench/Activity/detail.do?id='+n.id+'\';">'+n.name+'</a></td>';
                         html += '<td>'+n.owner+'</td>';
                         html += '<td>'+n.startDate+'</td>';
                         html += '<td>'+n.endDate+'</td>';

@@ -9,6 +9,7 @@ import com.liko.crm.utils.ServiceFactory;
 import com.liko.crm.utils.UUIDUtil;
 import com.liko.crm.vo.Pagination;
 import com.liko.crm.workbench.domain.Activity;
+import com.liko.crm.workbench.domain.ActivityRemark;
 import com.liko.crm.workbench.service.ActivityService;
 import com.liko.crm.workbench.service.ActivityServiceImpl;
 
@@ -45,9 +46,28 @@ public class ActivityController extends HttpServlet {
             edit(request,response);
         }else if("/workbench/Activity/update.do".equals(path)){
             update(request,response);
+        }else if("/workbench/Activity/detail.do".equals(path)){
+            detail(request,response);
+        }else if("/workbench/Activity/getRemarkByAid.do".equals(path)){
+            getRemarkByAid(request,response);
         }
     }
 
+    private void getRemarkByAid(HttpServletRequest request, HttpServletResponse response) {
+        String aid =request.getParameter("aid");
+        ActivityService as = (ActivityService) ServiceFactory.getService(new ActivityServiceImpl());
+        List<ActivityRemark> ar =as.getRemarkByAid(aid);
+        System.out.println(ar);
+        PrintJson.printJsonObj(response,ar);
+    }
+
+    private void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id =request.getParameter("id");
+        ActivityService as = (ActivityService) ServiceFactory.getService(new ActivityServiceImpl());
+        Activity a=as.detail(id);
+        request.setAttribute("a",a);
+        request.getRequestDispatcher("/workbench/activity/detail.jsp").forward(request,response);
+    }
 
 
     private void edit(HttpServletRequest request, HttpServletResponse response) {

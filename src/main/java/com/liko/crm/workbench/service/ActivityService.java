@@ -3,6 +3,7 @@ package com.liko.crm.workbench.service;
 import com.liko.crm.settings.domain.User;
 import com.liko.crm.vo.Pagination;
 import com.liko.crm.workbench.domain.Activity;
+import com.liko.crm.workbench.domain.ActivityRemark;
 
 import java.util.List;
 import java.util.Map;
@@ -23,4 +24,8 @@ public interface ActivityService {
     Map<String, Object> selectUlistAndActivity(String id);
 
     boolean update(Activity a);
+
+    Activity detail(String id);
+
+    List<ActivityRemark> getRemarkByAid(String aid);
 }
