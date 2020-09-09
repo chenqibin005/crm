@@ -28,4 +28,6 @@ public interface ActivityService {
     Activity detail(String id);
 
     List<ActivityRemark> getRemarkByAid(String aid);
+
+    boolean delRemark(String id);
 }

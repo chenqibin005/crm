@@ -22,4 +22,7 @@
         select * from tbl_activity_remark
         where activityId =#{aid}
     </select>
+    <delete id="delRemark">
+        delete from tbl_activity_remark where id =#{id}
+    </delete>
 </mapper>

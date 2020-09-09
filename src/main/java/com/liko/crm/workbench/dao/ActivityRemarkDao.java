@@ -14,4 +14,6 @@ public interface ActivityRemarkDao {
     int deleteByIds(String[] ids);
 
     List<ActivityRemark> getRemarkByAid(String aid);
+
+    int delRemark(String id);
 }

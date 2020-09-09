@@ -113,6 +113,13 @@
                     }
                 })
             })
+
+            $("#remarkBody").on("mouseover",".remarkDiv",function(){
+                $(this).children("div").children("div").show();
+            })
+            $("#remarkBody").on("mouseout",".remarkDiv",function(){
+                $(this).children("div").children("div").hide();
+            })
         });
         showRemarkActivity();
 
@@ -130,7 +137,7 @@
                     var html = "";
                     $.each(data, function (i, n) {
 
-                        html += '<div class="remarkDiv" style="height: 60px;">';
+                        html += '<div id="'+n.id+'" class="remarkDiv" style="height: 60px;">';
                         html += '<img title="zhangsan" src="image/user-thumbnail.png" style="width: 30px; height:30px;">';
                         html += '<div style="position: relative; top: -40px; left: 40px;">';
                         html += '<h5>' + n.noteContent + '</h5>';
@@ -138,16 +145,37 @@
                         html += (n.editFlag == 0 ? n.createTime : n.editTime) + '由' + (n.editFlag == 0 ? n.createBy : n.editBy) + '</small>';
                         html += '<div style="position: relative; left: 500px; top: -30px; height: 30px; width: 100px; display: none;">';
                         html += '<a class="myHref" href="javascript:void(0);"><span class="glyphicon glyphicon-edit"';
-                        html += 'style="font-size: 20px; color: #E6E6E6;"></span></a>';
+                        html += 'style="font-size: 20px; color: #FF0000;"></span></a>';
                         html += '&nbsp;&nbsp;&nbsp;&nbsp;';
-                        html += 'a class="myHref" href="javascript:void(0);"><span class="glyphicon glyphicon-remove"';
-                        html += 'style="font-size: 20px; color: #E6E6E6;"></span></a>';
+                        html += '<a class="myHref" href="javascript:void(0);" onclick="delRemark(\''+n.id+'\')"><span class="glyphicon glyphicon-remove"';
+                        html += 'style="font-size: 20px; color: #FF0000;"></span></a>';
                         html += '</div>';
                         html += ' </div>';
                         html += ' </div>';
 
                     })
                     $("#remarkDiv").before(html);
+                }
+            })
+
+
+        }
+        function delRemark(id) {
+
+            $.ajax({
+                url:"workbench/Activity/delRemark.do",
+                data:{
+                    "id":id
+                },
+                type:"post",
+                dataType:"json",
+                success:function (data) {
+                    if (data.success){
+                        $("#"+id).remove();
+                        //showRemarkActivity();
+                    }else{
+                        alert("删除失败")
+                    }
                 }
             })
         }
@@ -318,7 +346,7 @@
 </div>
 
 <!-- 备注 -->
-<div style="position: relative; top: 30px; left: 40px;">
+<div style="position: relative; top: 30px; left: 40px;" id="remarkBody">
     <div class="page-header">
         <h4>备注</h4>
     </div>

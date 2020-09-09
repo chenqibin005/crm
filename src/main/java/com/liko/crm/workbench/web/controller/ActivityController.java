@@ -50,7 +50,16 @@ public class ActivityController extends HttpServlet {
             detail(request,response);
         }else if("/workbench/Activity/getRemarkByAid.do".equals(path)){
             getRemarkByAid(request,response);
+        }else if("/workbench/Activity/delRemark.do".equals(path)){
+            delRemark(request,response);
         }
+    }
+
+    private void delRemark(HttpServletRequest request, HttpServletResponse response) {
+        String id =request.getParameter("id");
+        ActivityService as = (ActivityService) ServiceFactory.getService(new ActivityServiceImpl());
+        boolean success= as.delRemark(id);
+        PrintJson.printJsonFlag(response,success);
     }
 
     private void getRemarkByAid(HttpServletRequest request, HttpServletResponse response) {

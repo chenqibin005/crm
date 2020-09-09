@@ -29,6 +29,16 @@ public class ActivityServiceImpl implements ActivityService{
     }
 
     @Override
+    public boolean delRemark(String id) {
+        boolean flag=true;
+        int count =arDao.delRemark(id);
+        if (count!=1){
+            flag =false;
+        }
+        return flag;
+    }
+
+    @Override
     public Activity detail(String id) {
         Activity a = activityDao.detail(id);
         return a;
