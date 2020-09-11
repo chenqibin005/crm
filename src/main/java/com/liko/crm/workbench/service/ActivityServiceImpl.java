@@ -18,9 +18,32 @@ import java.util.Map;
  * @date 2020/9/1 15:18
  */
 public class ActivityServiceImpl implements ActivityService{
+
     private ActivityDao activityDao = SqlSessionUtil.getSqlSession().getMapper(ActivityDao.class);
     private ActivityRemarkDao arDao = SqlSessionUtil.getSqlSession().getMapper(ActivityRemarkDao.class);
     private UserDao userDao =SqlSessionUtil.getSqlSession().getMapper(UserDao.class);
+
+
+    @Override
+    public boolean saveRemark(ActivityRemark ar) {
+        boolean f = true;
+        int count =arDao.saveRemark(ar);
+        if (count!=1){
+            f=false;
+        }
+        return f;
+    }
+
+    @Override
+    public boolean UpdateRemark(ActivityRemark ar) {
+        boolean flag =true;
+
+        int count =arDao.UpdateRemark(ar);
+        if (count!=1){
+            flag =false;
+        }
+        return flag;
+    }
 
     @Override
     public List<ActivityRemark> getRemarkByAid(String aid) {

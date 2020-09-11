@@ -33,6 +33,9 @@
     <servlet-name>ActivityController</servlet-name>
     <servlet-class>com.liko.crm.workbench.web.controller.ActivityController</servlet-class>
   </servlet>
+
+
+
   <servlet-mapping>
     <servlet-name>ActivityController</servlet-name>
     <url-pattern>/workbench/Activity/getUserList.do</url-pattern>
@@ -44,10 +47,18 @@
     <url-pattern>/workbench/Activity/detail.do</url-pattern>
     <url-pattern>/workbench/Activity/getRemarkByAid.do</url-pattern>
     <url-pattern>/workbench/Activity/delRemark.do</url-pattern>
+    <url-pattern>/workbench/Activity/saveRemark.do</url-pattern>
+    <url-pattern>/workbench/Activity/UpdateRemark.do</url-pattern>
 
   </servlet-mapping>
-  
-  
+  <servlet>
+    <servlet-name>ClueController</servlet-name>
+    <servlet-class>com.liko.crm.workbench.web.controller.ClueController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ClueController</servlet-name>
+    <url-pattern>/workbench/Clue/getUserList.do</url-pattern>
+  </servlet-mapping>
   
 </web-app>
 

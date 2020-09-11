@@ -3,6 +3,7 @@ package com.liko.crm.workbench.dao;
 import com.liko.crm.workbench.domain.ActivityRemark;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author hangzhi1063
@@ -16,4 +17,8 @@ public interface ActivityRemarkDao {
     List<ActivityRemark> getRemarkByAid(String aid);
 
     int delRemark(String id);
+
+    int saveRemark(ActivityRemark ar);
+
+    int UpdateRemark(ActivityRemark ar);
 }
