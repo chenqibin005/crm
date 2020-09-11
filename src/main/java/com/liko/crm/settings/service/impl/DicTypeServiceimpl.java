@@ -9,5 +9,5 @@ import com.liko.crm.utils.SqlSessionUtil;
  * @date 2020/9/10 19:48
  */
 public class DicTypeServiceimpl implements DicTypeService{
-    private DicTypeDao dicTypeService = SqlSessionUtil.getSqlSession().getMapper(DicTypeDao.class);
+    private DicTypeDao dicTypeDao = SqlSessionUtil.getSqlSession().getMapper(DicTypeDao.class);
 }
