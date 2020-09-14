@@ -5,5 +5,7 @@
 <mapper namespace="com.liko.crm.settings.dao.DicValueDao">
 
 
-
+    <select id="getDicValue" resultType="DicValue">
+        select * from tbl_dic_value where typeCode =#{code}
+    </select>
 </mapper>
