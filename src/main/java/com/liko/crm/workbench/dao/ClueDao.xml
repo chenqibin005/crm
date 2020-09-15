@@ -5,8 +5,100 @@
 
 <mapper namespace="com.liko.crm.workbench.dao.ClueDao">
 	
-	
-  	
+	<insert id="saveClue">
+        insert into tbl_clue (
+        id,
+        fullname,
+        appellation,
+        owner,
+        company,
+        job,
+        email,
+        phone,
+        website,
+        mphone,
+        state,
+        source,
+        createBy,
+        createTime,
+        description,
+        contactSummary,
+        nextContactTime,
+        address
+        )
+        values(
+
+       #{id},
+       #{fullname},
+       #{appellation},
+       #{owner},
+       #{company},
+       #{job},
+       #{email},
+       #{phone},
+       #{website},
+       #{mphone},
+       #{state},
+       #{source},
+       #{createBy},
+       #{createTime},
+       #{description},
+       #{contactSummary},
+       #{nextContactTime},
+       #{address}
+
+        )
+
+    </insert>
+
+    <select id="getTotalByCondition" resultType="int">
+        select count(*) from tbl_clue
+        <where>
+            <if test="company!=null and company !=''">
+                company like '%' #{company} '%'
+            </if>
+            <if test="fullname !=null and fullname !=''">
+                and  fullname like '%' #{fullname} '%'
+            </if>
+            <if test="mphone !=null and mphone !=''">
+                and  mphone '%' #{fullname} '%'
+            </if>
+            <if test="source !=null and source !=''">
+                and  source '%' #{source} '%'
+            </if>
+            <if test="state !=null and state !=''">
+                and  state '%' #{state} '%'
+            </if>
+            <if test="phone !=null and phone !=''">
+                and phone '%' #{phone} '%'
+            </if>
+        </where>
+    </select>
+    <select id="getClueListByCoindition" resultType="Clue">
+        select * from tbl_clue
+        <where>
+            <if test="company!=null and company !=''">
+                company like '%' #{company} '%'
+            </if>
+            <if test="fullname !=null and fullname !=''">
+                and  fullname like '%' #{fullname} '%'
+            </if>
+            <if test="mphone !=null and mphone !=''">
+                and  mphone '%' #{fullname} '%'
+            </if>
+            <if test="source !=null and source !=''">
+                and  source '%' #{source} '%'
+            </if>
+            <if test="state !=null and state !=''">
+                and  state '%' #{state} '%'
+            </if>
+            <if test="phone !=null and phone !=''">
+                and phone '%' #{phone} '%'
+            </if>
+        </where>
+        order by createTime desc
+        limit #{skipPage} ,#{pageSize}
+    </select>
 </mapper>
 
 

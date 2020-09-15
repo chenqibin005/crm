@@ -63,6 +63,8 @@
   <servlet-mapping>
     <servlet-name>ClueController</servlet-name>
     <url-pattern>/workbench/Clue/getUserList.do</url-pattern>
+    <url-pattern>/workbench/Clue/saveClue.do</url-pattern>
+    <url-pattern>/workbench/Clue/pageList.do</url-pattern>
   </servlet-mapping>
   
 </web-app>

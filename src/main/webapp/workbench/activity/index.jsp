@@ -23,17 +23,19 @@
     <script type="text/javascript">
 
         $(function () {
+
+            $(".time").datetimepicker({
+                minView: "month",
+                language: 'zh-CN',
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayBtn: true,
+                pickerPosition: "bottom-left"
+            });
             //操作添加模块
             //获取添加按钮弹出添加模块
             $("#addBtn").click(function () {
-                $(".time").datetimepicker({
-                    minView: "month",
-                    language: 'zh-CN',
-                    format: 'yyyy-mm-dd',
-                    autoclose: true,
-                    todayBtn: true,
-                    pickerPosition: "bottom-left"
-                });
+
                 //向服务器发送ajax请求 获取到用户list
                 $.ajax({
                     url: "workbench/Activity/getUserList.do",
@@ -176,14 +178,7 @@
                 //打开市场活动修改页面
                 $("#editBtn").click(function () {
 
-                    $(".time").datetimepicker({
-                        minView: "month",
-                        language: 'zh-CN',
-                        format: 'yyyy-mm-dd',
-                        autoclose: true,
-                        todayBtn: true,
-                        pickerPosition: "bottom-left"
-                    });
+
 
                     var $xz=$("input[name=xz]:checked");
                     if ($xz.length==0){
