@@ -8,7 +8,10 @@ import com.liko.crm.utils.PrintJson;
 import com.liko.crm.utils.ServiceFactory;
 import com.liko.crm.utils.UUIDUtil;
 import com.liko.crm.vo.Pagination;
+import com.liko.crm.workbench.domain.Activity;
 import com.liko.crm.workbench.domain.Clue;
+import com.liko.crm.workbench.service.ActivityService;
+import com.liko.crm.workbench.service.ActivityServiceImpl;
 import com.liko.crm.workbench.service.ClueService;
 import com.liko.crm.workbench.service.ClueServiceImpl;
 
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +43,62 @@ public class ClueController extends HttpServlet {
             save(request, response);
         } else if ("/workbench/Clue/pageList.do".equals(path)) {
             pageList(request, response);
+        }else if ("/workbench/Clue/detail.do".equals(path)) {
+            detail(request, response);
+        }else if ("/workbench/Clue/getActivityListByClueId.do".equals(path)) {
+            getActivityListByClueId(request, response);
+        }else if ("/workbench/Clue/delById.do".equals(path)) {
+            delById(request, response);
+        }else if ("/workbench/Clue/getActivityListByAIdandNotByClueId.do".equals(path)) {
+            getActivityListByAIdandNotByClueId(request, response);
+        }else if ("/workbench/Clue/saveActivity.do".equals(path)) {
+            saveActivity(request, response);
         }
+    }
+
+    private void saveActivity(HttpServletRequest request, HttpServletResponse response) {
+
+        String[] aids =request.getParameterValues("aid");
+
+        String clueId =request.getParameter("cid");
+        ClueService cs = (ClueService) ServiceFactory.getService(new ClueServiceImpl());
+
+        boolean b =cs.saveActivity(aids,clueId);
+        PrintJson.printJsonFlag(response,b);
+    }
+
+    private void getActivityListByAIdandNotByClueId(HttpServletRequest request, HttpServletResponse response) {
+
+        String aname = request.getParameter("aname");
+        String clueId = request.getParameter("clueId");
+        Map<String,String> map =new HashMap<>();
+        map.put("aname",aname);
+        map.put("clueId",clueId);
+        ActivityService as = (ActivityService) ServiceFactory.getService(new ActivityServiceImpl());
+        List<Activity> aList=as.getActivityListByAIdandNotByClueId(map);
+        PrintJson.printJsonObj(response,aList);
+    }
+
+    private void delById(HttpServletRequest request, HttpServletResponse response) {
+        String id = request.getParameter("id");
+        ClueService cs = (ClueService) ServiceFactory.getService(new ClueServiceImpl());
+        boolean flag=cs.delById(id);
+        PrintJson.printJsonFlag(response,flag);
+    }
+
+    private void getActivityListByClueId(HttpServletRequest request, HttpServletResponse response) {
+        String clueId =request.getParameter("id");
+        ActivityService as = (ActivityService) ServiceFactory.getService(new ActivityServiceImpl());
+        List<Activity> alist=as.getActivityListByClueId(clueId);
+        PrintJson.printJsonObj(response,alist);
+    }
+
+    private void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id =request.getParameter("id");
+        ClueService cs = (ClueService) ServiceFactory.getService(new ClueServiceImpl());
+        Clue clue =cs.detail(id);
+        request.setAttribute("clue",clue);
+        request.getRequestDispatcher("/workbench/clue/detail.jsp").forward(request,response);
     }
 
     private void pageList(HttpServletRequest request, HttpServletResponse response) {

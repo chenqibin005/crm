@@ -14,4 +14,11 @@ public interface ClueService {
     boolean saveClue(Clue clue);
 
     Pagination<Clue> pageList(Map<String, Object> map);
+
+    Clue detail(String id);
+
+    boolean delById(String id);
+
+
+    boolean saveActivity(String[] aids, String clueId);
 }

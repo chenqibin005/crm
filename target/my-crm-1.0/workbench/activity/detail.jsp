@@ -53,7 +53,7 @@
             });
 
             $("#btnEdit").click(function () {
-                alert(1111111)
+
                 var id = $("#hdId").val();
                 $.ajax({
                     url: "workbench/Activity/selectUlistAndActivity.do",

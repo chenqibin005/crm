@@ -78,6 +78,18 @@ public class ActivityServiceImpl implements ActivityService{
     }
 
     @Override
+    public List<Activity> getActivityListByAIdandNotByClueId(Map<String, String> map) {
+        List<Activity> aList=activityDao.getActivityListByAIdandNotByClueId(map);
+        return aList;
+    }
+
+    @Override
+    public List<Activity> getActivityListByClueId(String clueId) {
+        List<Activity> alist=activityDao.getActivityListByClueId(clueId);
+        return alist;
+    }
+
+    @Override
     public Pagination<Activity> pageList(Map<String, Object> map) {
 
         //总记录数total

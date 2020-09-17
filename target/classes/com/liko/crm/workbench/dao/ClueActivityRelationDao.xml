@@ -5,8 +5,18 @@
 
 <mapper namespace="com.liko.crm.workbench.dao.ClueActivityRelationDao">
 	
-	
-  	
+	<delete id="delById">
+        delete  from tbl_clue_activity_relation where id =#{id}
+    </delete>
+  	<insert id="saveActivity">
+        insert into  tbl_clue_activity_relation values (
+        #{id},
+        #{clueId},
+        #{activityId}
+
+
+        )
+    </insert>
 </mapper>
 
 
